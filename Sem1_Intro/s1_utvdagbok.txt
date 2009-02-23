@@ -1,0 +1,140 @@
+Seivan Heidari & Marcus Westin 
+TDP007, S1
+
+19/1
+	Vi programmerade lite i Ruby för första gången idag.
+	Tyckte syntaxen, speciellt det här med {} eller do end påminde mycket om 
+	LISP. Hur som helst så var det här med kodblock ganska rörigt ett tag tills vi insåg 	
+	att det är ungefär som en parameter, fast istället för en simpel variabel så är 	
+	det mer som ett block med kod.
+
+	Men var lite ovant med kod-block då man inte har sysslat med liknande förut.
+	Det är också lite svårt att förklara vad block egentligen är, men 'kodsnutt' 	
+	får räcka än så länge.
+
+	Första uppgifterna handlade om iteration och just block.
+	Vi försökte oss på alla uppgifter, men vissa var lite luddigt förklarade och svar 	
+	från assistenterna var mest "Hur vill du att det ska vara?"
+
+Iterators
+	Repeat
+	En av de uppgifterna som var lite svår att tyda då man inte har sysslat med
+	block tidigare, men vi fick tyda det rätt så fritt.
+	Gjorde en klass som heter Repeat som fick ha alla funktioner, även om det 
+	inte stod specifikt att n_times skulle vara med (därför är den statisk)
+
+	each() får en Integer X av konstruktorn, och ska då kalla på det inkommande 	
+	blocket X antal gånger n_times() får X när den ropas och då räknar den från 0 till X och skriver ut 	
+	X varje gång. each for block som parameter, medan n_times ropar på blocket den har X 	
+	antal gånger. Nu vet jag inte om det stämmer, men det är inte så svårt att rätta till om man 	
+	får lite mer 'klara' instruktioner
+
+	Resten var inte så svåra att tyda eller att implementera.
+
+20/1
+	Börjat kolla lite mer på Ruby syntaxen, känns lite som att det finns många färdiga funktioner att bara använda. 
+	Läste lite mer 	om mixins och att hur de har 'löst' det här med multipla arv.
+	Tydligen är mixins så att istället för multipla arv så ärver man en klass som modifierar huvudklassen. 
+	På så sätt att om jag skapar en Fixnum klass så kan jag ersätta, lägga till eller ändra vissa funktioner i Fixnum-klassen.
+	T.ex Enumerables.
+
+	Vi gillar dock faktum att Ruby är _OTROLIGT_ likt engelskan.
+	De flesta funktioner går att läsa rakt av och få en tydlig bild utav vad den gör.
+	Tror också att våra föräldrar skulle ha lätt att förstå syntaxen rakt av utan att kunna 	
+	språket eller tidigare programmering alls.
+	
+	5.times do print  "Hej världen" end <-- testa att läsa detta högt!
+
+Extensions
+	Lite strul idag med tanke på att vi båda jobbar på Macbook med inbyggda
+	Ruby (1.8.6) så har vi inte exakt de senaste funktionerna, så istället fick vi
+	skriva dessa uppgifter på en Debian-server.
+	
+	Det var uppgifterna med union och intersect som strulade då vi inte kunde använda  array1 = array2 eller array1 & array2  
+	för att göra intersect eller union. Tog ett tag att komma på det dock, men det löste sig.
+
+	Shuffle var inget svårt, däremot lite svårare att testa, då kollar vi bara på 
+	längden och att det är likadana element i båda arrayerna. 
+	Dvs sortera (efter shuffle) och jämför.
+
+21/1
+	Nu blev det snabbt roligt att arbeta med Ruby!
+	Har den senaste tiden sneglat på ramverket Ruby on Rails.
+	Har egentligen inte så mycket att göra med den här kursen, däremot är det
+	kul och praktiskt att jobba lite på sidan med språket, projektmässigt.
+	Tills riktiga projektet börjar...
+	
+	Hur som helst, Ruby visade sig vara lite buggig när det gäller de olika 	
+	versionerna. Är dock ett 'levande' språk som ändras hela tiden med nya 	
+	patchar så det är ett relativt ungt språk.
+	Hoppas bara de löser prestandaproblemen så det kan bli industristandard för 
+	webbapplikationer/hemsidor.
+	För det är verkligen ett bra språk för programmeraren!
+
+	Regexp verkar otroligt intressant med, påminner lite om tiden då vi gjorde våra egna
+	parsningsfunktioner, men detta kommer underlätta något otroligt.
+	Gäller dock att hitta funktionern som man kan utnyttja tillsammans med regexp!
+
+Regexp
+	Att lösa ut användarnamn från strängarna var inte så svårt som vi trodde att det skulle 	
+	vara, däremot att lösa ut kod-taggarna från html filer var lite svårare.
+	Dvs en sträng med information skulle matas in och i den strängen skulle det finnas text s
+	om -> Username: Seivan123 <-- och så skulle det skrivas ut.
+	Det ska alltså börja med Username och sluta med : sedan ha mellanslag och sedan ha 	
+	en sekvens av bokstäver och siffror tills whitespace och det ska matcha de uttryck vi 	
+	söker efter.
+
+	Att lösa ut HTML taggarna tog ett tag, men det löste sig.
+	Första problemet vi stötte på var att det var svårt att få ut endast -taggen- i kodstycket.
+	Utan fick ut allt efter < och innan >
+	t.ex < meta blabla > då fick vi ut meta och blabla. Löste det genom att sätta stopp efter 	
+	första ordet, som en avgränsning.
+
+22/1
+	Har kollat lite på getters & setters och försökt använda Ruby's koncept inom OO.
+	I vanliga fall så definerar man funktioner för att hämta eller definera variabler.
+	t.ex
+	
+	def set_name(name)
+		@name = name
+	end	
+
+	def get_surname
+		return @surname
+	end
+	
+	Men i Ruby så är det redan inbäddat med attribute-modifierare.
+	attr_accessor ger dig full tillgång till variabeln, dvs skriva och läsa. Detta kan då funka 	
+	som en 'setter'.
+	attr_reader ger dig läsmöjligheter, den här gången som en 'getter'
+
+	I exemplet ovan så blir det väl
+	attr_accessor :name
+	attr_reader :surname
+
+	Det är också ganska fräckt att man kan modifiera existerande klasser så lätt, jag vet inte hur det var i de förra språken 		
+	eftersom vi inte försökte oss på något sådant förutom att 	
+	överladda någon viss operator eller funktion. Men det var inte lika simpelt som Ruby.
+	Syntaxen är underbar i och med att det är så lätt att döpa en funktion set_name= och 	
+	sedan utnyttja det som set_name="Markus" och ha set_name? för att få ut namnet!
+	
+accessor
+	Roligaste uppgiften än så hittills, vi gjorde flera olika versioner, 
+	mest bara för att det 	gick att kombinera olika lösningar.	
+	Till PersonName så valde vi låta konstruktorn ropa på funktionen för att tilldela 	
+	variablerna värden. Finns två anledningar till detta
+	1)DRY - Slipper ha extra kod i konstruktorn för att tilldela variablerna 
+	2)Funktionen var med i uppgiften, så därför används den här!
+
+	På så sätt så finns fullname_setter() att användas både av användaren och när objektet 	skapas.
+
+	Här kunde vi välja mellan hash eller att sätta defaultvärden på in-parametrarna.
+	Valde defaultvärden eftersom det ser snyggare ut rent syntaxmässigt.
+	
+
+ 
+
+
+	
+
+	

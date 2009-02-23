@@ -1,0 +1,59 @@
+ Uppg1
+  Har experimenterat otroligt mycket med denna uppgift. Målet var att återanvända så mycket som möjligt.
+  Testade en hel del olika parsers
+  (/(\d+)\s+[-]\s+(\d+)/) -> ints whitespaces - whitespaces ints -> för differensen mellan minsta och högsta värdet
+  (x[/\d\d\s/].to_i- x[/[-]\d\d/].to_i) -> för att räkna ut differensen SAMTIDIGT som vi parsar från texten (slippa iterera igen)
+  (/\s+\d+\s.([A-Za-z_]+)\s/) -> whitespaces ints whitespace punkt Namn whitespace -> Namnet på fotbollslaget 
+  (/\s\s\s\s\d[.]\s([A-Za-z_]+)\s/) -> Som ovan fast whitepaces i början hårdkodat
+  Men vi valde med att strippa bort alla whitspaces i början och slutet på varje rad, och parsa med columner, /\s+/
+  Däremot vid evaluering så använde vi oss utav (mer avancerade) reguljära uttryck, som de ovan.
+  
+  Valde också att stoppa allt i en map med nyckel => diff
+  def from_pairs_e(keys,values)
+     hash = {}
+     keys.size.times { |i| hash[ keys[i] ] = values[i] }
+     hash
+  end
+  
+  Ganska så finurligt om båda är lika stora.
+  För att sedan få klassen att funka med båda filerna så ändrade man bara vilken kolumn den ska läsa.
+  Var vissa hårdkodade sektioner där med, men det är lätt att ändra.
+  
+  
+ Uppg1
+ Har strulat otroligt mycket med REXML, mest för att få ut vcardsen, så vi beslutade att testa andra former av parsning.
+ hpcrot fanns också, men har otroligt med dåliga tutorials på nätet och dokumentationen är inte fullständig om ens borde kallas för dokumentation
+ SAX känns för gammalmodig och lite för uselt, 
+ testade lite med 
+ require 'rexml/document'
+ require 'rexml/streamlistener'
+ include REXML
+ class MyListener
+   include REXML::StreamListener
+
+   def tag_start(name, attrs)
+     puts "Start #{name}"
+   end
+
+   def tag_end(name, attrs)
+     puts "End #{name}"
+   end
+
+   def text(text)
+     puts "text: #{text}"
+   end
+ end
+ test = MyListener.new
+ doc = File.new("test.html")
+ REXML::Document.parse_stream(doc, test)
+ 
+ Kommer nog inte att få ut vcardsen innan seminariet, så vi funderar över om vi ska lämna in i tid eller försöka få ut vcardsen innan inlämning. 
+ Uppgiftsspecificationen var inte så där tydlig med vcardsen. EFter seminariet så såg jag att man kunde iterera över samma element i blocket med child::node()//
+ Detta stod inte någonstans på dokumentationen vi hade läst (på flera sidor), men glada över att det löste sig nu.
+ Allt skrivs in till en array för att sedan skrivas ut.
+ I början skrivs "\n" in för att göra en ny rad för varje 'dag/datum' så att säga.
+ Vi skippade att ha med vcard/<span class='locality'>, <span class='region'> för att det skulle upprepa området igen.
+ Däremot så tog vi med "street-address" och "org fn"
+ Tyckte att REXML var otroligt kul att lära sig och kan bli användbart, speciellt när man lär sig lägga till värden på olika formulär och skicka in.
+ Som t.ex en spambot!
+ 
